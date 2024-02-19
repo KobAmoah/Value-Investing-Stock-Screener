@@ -36,5 +36,5 @@ DEA Outputs: Trailing P/E, forward P/E, EV/Sales, EV/EBIT, P/BV, PEG, P/sales.
 By combining DTR and DEA, the model provides investors with a powerful tool to identify undervalued stocks systematically. This approach enhances decision-making in fundamental investing by leveraging quantitative techniques to uncover investment opportunities that may have been overlooked.
 
 ## Credits
-I am incredibly grateful to Hogan Tong. His initial application of DEA as a stock screening tool inspired this project.
+I am incredibly grateful to Hogan Tong,CFA . His initial application of DEA as a stock screening tool inspired this project.
 
