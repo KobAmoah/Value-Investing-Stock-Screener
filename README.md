@@ -11,8 +11,16 @@ The Enhanced Stock Screening Model integrates Decision Tree Regression and Data 
 ## Introduction:
 The Enhanced Stock Screening Model integrates Decision Tree Regression (DTR) and Data Envelopment Analysis (DEA) to identify potentially undervalued stocks. DTR assesses stocks based on their returns and financial metrics, while DEA evaluates their efficiency relative to market valuation. This approach offers a systematic method for investors to uncover investment opportunities in the stock market.
 
-## Code Files:
+## Usage:
 
+The following provides instructions on setting up your project locally. To get a local copy up and running, follow these steps.
+1. Clone the repo:
+
+````git clone https://github.com/KobAmoah/Fundamental-Stock-Screener.git````
+
+2. Compile and run the program on the terminal :
+
+````python FundamentalScreener.py````
 
 ### Methodology:
 #### Decision Tree Regression (DTR):
