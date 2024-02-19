@@ -11,6 +11,9 @@ The Enhanced Stock Screening Model integrates Decision Tree Regression and Data 
 ## Introduction:
 The Enhanced Stock Screening Model integrates Decision Tree Regression (DTR) and Data Envelopment Analysis (DEA) to identify potentially undervalued stocks. DTR assesses stocks based on their returns and financial metrics, while DEA evaluates their efficiency relative to market valuation. This approach offers a systematic method for investors to uncover investment opportunities in the stock market.
 
+## Code Files:
+
+
 ### Methodology:
 #### Decision Tree Regression (DTR):
 DTR involves segmenting predictor variables into distinct regions to predict stock returns. It starts with all observations in a single region and iteratively splits data into smaller regions to minimize the Residual Sum of Squares (RSS). The tree is pruned to prevent overfitting, using a Grid Search Cross-Validation to optimize hyperparameters.
@@ -31,4 +34,7 @@ DEA Outputs: Trailing P/E, forward P/E, EV/Sales, EV/EBIT, P/BV, PEG, P/sales.
 
 ## Conclusion:
 By combining DTR and DEA, the model provides investors with a powerful tool to identify undervalued stocks systematically. This approach enhances decision-making in fundamental investing by leveraging quantitative techniques to uncover investment opportunities that may have been overlooked.
+
+## Credits
+I am incredibly grateful to Hogan Tong. His initial application of DEA as a stock screening tool inspired this project.
 
