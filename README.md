@@ -33,8 +33,11 @@ DEA calculates the efficiency of each stock by comparing its financial metrics t
 
 ### Inputs and Outputs:
 DTR Inputs: Beta, operating margin, profit margin, revenue per share, return on assets, return on equity, EPS, revenue growth, leverage ratio, Trailing P/E, forward P/E, EV/Sales, EV/EBIT, P/BV, PEG, P/sales.
+
 DTR Outputs: Total Returns
+
 DEA Inputs: Beta, operating margin, profit margin, revenue per share, return on assets, return on equity, EPS, revenue growth, leverage ratio.
+
 DEA Outputs: Trailing P/E, forward P/E, EV/Sales, EV/EBIT, P/BV, PEG, P/sales.
 
 ## Application:
