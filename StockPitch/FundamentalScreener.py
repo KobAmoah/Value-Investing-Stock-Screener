@@ -182,7 +182,7 @@ class FundamentalScreener:
         russell = russell.iloc[:,:2]
         russell = pd.DataFrame(russell['Company'].values, index=russell['Ticker'], columns=['Company'])
         # Join Russell and res on common indices
-        res = russell.join(res, how='inner')
+        res = russell.join(res, how='inner').sort_values('Efficiency')
         
         return res
     
@@ -213,7 +213,7 @@ if __name__ == "__main__":
     analyzer.fit_decision_tree_model(operating_stats_all, valuation_stats_all, period_returns)
     
     # Define the query criteria for selecting the best stocks based on financial metrics
-    query_criteria = 'Diluted_EPS < 7.4  and Price_Sales < 2.63 and Enterprise_Value_EBITDA < 246.635'
+    query_criteria = 'Diluted_EPS > 7.4  and Price_Sales > 2.63 and Enterprise_Value_EBITDA < 246.635'
     
     # Extract operating and valuation statistics again for further analysis
     operating_stats, valuation_stats = analyzer.extract_financial_info(tickers,list(range(2)))
