@@ -8,7 +8,7 @@ The Program creates a class that identifies cheap stocks using a combination of 
 3. Extracts period return data for the obtained stocks.
 4. Fits a decision tree model using the valuation and operating statistics as features and the period returns as the target variable.
 5. Plots the decision tree and selects the best group of stocks(highest return) based on the plot.
-6. Runs Data Envelopment Analysis (DEA) to evaluate the efficiency of the selected stocks and returns the top 5 cheapest stocks based on their normalized efficiency score.
+6. Runs Data Envelopment Analysis (DEA) to evaluate the efficiency of the selected stocks and returns the top 10 cheapest stocks based on their normalized efficiency score.
 
 @author: Kobena Amoah
 """
