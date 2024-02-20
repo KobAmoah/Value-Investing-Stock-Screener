@@ -136,8 +136,6 @@ class FundamentalScreener:
         """
         stock_info = pd.concat([operating_stats, valuation_stats], axis=1)
         stock_info.rename(columns=lambda x: x.replace(' ', '_').replace('/', '_'),inplace=True)
-        print(stock_info.columns)
-        print(stock_info)
         best_stocks = stock_info.query(query_criteria)
         return best_stocks
 
@@ -177,6 +175,15 @@ class FundamentalScreener:
             val = si.get_stats_valuation(res.index[i])
             res.iloc[i, 1] = val.loc[val.iloc[:, 0].str.contains('Market Cap')].iloc[0, 1]
 
+        # Obtain Stock list from Russell 1000 (This enables us to get company name)
+        url = f"http://en.wikipedia.org/wiki/Russell_1000_Index"
+        russell = pd.read_html(url)[2]
+        russell["Ticker"] = russell["Ticker"].str.replace(".", "-")
+        russell = russell.iloc[:,:2]
+        russell = pd.DataFrame(russell['Company'].values, index=russell['Ticker'], columns=['Company'])
+        # Join Russell and res on common indices
+        res = russell.join(res, how='inner')
+        
         return res
     
 if __name__ == "__main__":
