@@ -137,13 +137,16 @@ class DataExtraction:
         for ticker in self.stock_list:
             # Retrieve historical price data
             stock_data = yf.download(ticker, start=start_date, end=end_date, progress= False ).dropna()
-            # Compute period returns
-            log_return = np.log(stock_data['Adj Close'] / stock_data['Adj Close'].shift())
-            log_return = log_return[~np.isnan(log_return)]
-            period_return = np.cumprod(1 + np.array(log_return)) - 1
-            period_return = np.multiply(period_return,100)
-            period_return = period_return.tolist()
-            returns_data.append({'Period_Return': period_return[-1], 'Ticker': ticker})
+            
+            # Check if the stock data has history starting from the start_date
+            if len(stock_data) > 0:
+                # Compute period returns
+                log_return = np.log(stock_data['Adj Close'] / stock_data['Adj Close'].shift())
+                log_return = log_return[~np.isnan(log_return)]
+                period_return = np.cumprod(1 + np.array(log_return)) - 1
+                period_return = np.multiply(period_return,100)
+                period_return = period_return.tolist()
+                returns_data.append({'Period_Return': period_return[-1], 'Ticker': ticker})
     
         returns_df = pd.DataFrame(returns_data)
         return returns_df
