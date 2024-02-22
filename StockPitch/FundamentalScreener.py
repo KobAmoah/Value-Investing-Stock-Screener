@@ -113,7 +113,7 @@ class FundamentalScreener:
 
         # Define the parameter grid
         param_grid = [{
-            'max_depth': [3, 4, 5, 6, 7, 8, 9,10, 11,12, 13],  # Depth of the tree
+            'max_depth': list(range(3, stock_info.shape[1])),  # Depth of the tree
             'max_features': [None, 'sqrt', 'log2']  # Number of features to consider when looking for the best split
         }]
         
