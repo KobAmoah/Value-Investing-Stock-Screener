@@ -32,11 +32,13 @@ class TunedDecisionTreeRegressor:
         Parameters:
             max_depth (int): Maximum depth of the decision tree. Default is None.
         """
+        self.min_samples_split = 20  # Minimum number of samples required to split an internal node
+        self.min_samples_leaf = 20  # Minimum number of samples required to be at a leaf node
         self.best_model = None
         self.best_model_params = None
         self.best_score = None
         self.x_val = None
-        self.dt_regressor = DecisionTreeRegressor()
+        self.dt_regressor = DecisionTreeRegressor(min_samples_split = self.min_samples_split, min_samples_leaf = self.min_samples_leaf)
         
         
     def fit_with_tuning(self, X, y, param_grid, cv=5, scoring='neg_mean_squared_error',n_jobs = -1, refit=True):
