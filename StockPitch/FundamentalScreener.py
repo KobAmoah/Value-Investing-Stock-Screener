@@ -213,7 +213,7 @@ if __name__ == "__main__":
     analyzer.fit_decision_tree_model(operating_stats_all, valuation_stats_all, period_returns)
     
     # Define the query criteria for selecting the best stocks based on financial metrics
-    query_criteria = 'Diluted_EPS > 7.4  and Price_Sales > 2.63 and Enterprise_Value_EBITDA < 246.635'
+    query_criteria = 'Operating_Margin > 28.245 and Enterprise_Value_Revenue > 8.86'
     
     # Extract operating and valuation statistics again for further analysis
     operating_stats, valuation_stats = analyzer.extract_financial_info(tickers,list(range(2)))
