@@ -195,12 +195,14 @@ if __name__ == "__main__":
     
     # Retrieve a list of technology stocks in the Russell 1000 for the specified sector
     tickers = analyzer.get_sector_stocks()
+
+    # Retrieve period returns for the specified list of tickers
+    period_returns = analyzer.get_period_returns(tickers) 
+
+    tickers = period_returns['Ticker'].values.tolist()
     
     # Extract operating and valuation statistics for the retrieved list of tickers
     operating_stats, valuation_stats = analyzer.extract_financial_info(tickers,list(range(1)) + [-1])
-    
-    # Retrieve period returns for the specified list of tickers
-    period_returns = analyzer.get_period_returns(tickers) 
     
     # Drop the index
     operating_stats_all = operating_stats.reset_index(drop=True)
