@@ -113,12 +113,10 @@ class FundamentalScreener:
 
         # Define the parameter grid
         param_grid = [{
-            'max_depth': [3, 5, 7, 9,11,13],  # Depth of the tree
-            'min_samples_split': [2, 5, 7,10],  # Minimum number of samples required to split an internal node
-            'min_samples_leaf': [1, 2, 4, 6],  # Minimum number of samples required to be at a leaf node
+            'max_depth': [3, 4, 5, 6, 7, 8, 9,10, 11,12, 13],  # Depth of the tree
             'max_features': [None, 'sqrt', 'log2']  # Number of features to consider when looking for the best split
         }]
-
+        
         # Fit the model with hyperparameter tuning
         tuner.fit_with_tuning(stock_info, period_returns, param_grid) 
         tuner.plot_tree_model()
