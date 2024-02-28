@@ -91,8 +91,7 @@ class FundamentalScreener:
         """
         data_extractor = DataExtraction(tickers, [], [])
         end_date = dt.datetime.now().strftime("%Y-%m-%d")
-        # Note start_date is is quarterly.(Reason being, yahoo only offers quarterly financials for free)
-        start_date = (dt.datetime.now() - DateOffset(months=3)).strftime("%Y-%m-%d")
+        start_date = (dt.datetime.now() - DateOffset(months=12)).strftime("%Y-%m-%d")
         return data_extractor.get_period_returns(start_date, end_date)
 
     def fit_decision_tree_model(self, operating_stats, valuation_stats, period_returns):
