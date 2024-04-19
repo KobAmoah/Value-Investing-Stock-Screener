@@ -6,7 +6,7 @@
 ![GitHub Repo stars](https://img.shields.io/github/stars/KobAmoah/Fundamental-Stock-Screener?style=social)
 
 
-# Fundamental-Stock-Screener
+# Enhanced-Value-Investing-Stock-Screener
 The Enhanced Value Investing Stock Screening Model integrates Decision Tree Regression and Data Envelopment Analysis to systematically identify potentially undervalued stocks based on their financial performance and market valuation.
 
 ## Introduction:
