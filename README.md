@@ -7,7 +7,7 @@
 
 
 # Fundamental-Stock-Screener
-The Enhanced Stock Screening Model integrates Decision Tree Regression and Data Envelopment Analysis to systematically identify potentially undervalued stocks based on their financial performance and market valuation.
+The Enhanced Value Investing Stock Screening Model integrates Decision Tree Regression and Data Envelopment Analysis to systematically identify potentially undervalued stocks based on their financial performance and market valuation.
 
 ## Introduction:
 The Enhanced Stock Screening Model integrates Decision Tree Regression (DTR) and Data Envelopment Analysis (DEA) to identify potentially undervalued stocks. DTR assesses stocks based on their returns and financial metrics, while DEA evaluates their efficiency relative to market valuation. This approach offers a systematic method for investors to uncover investment opportunities in the stock market.
