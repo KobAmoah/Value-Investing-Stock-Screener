@@ -29,7 +29,7 @@ The following provides instructions on setting up your project locally. To get a
 
 ````$ python FundamentalScreener.py````
 
-** Note the program will take at least an hour to run on your computer.
+** Note the program will take at least an hour to run on your computer. I had to web scrape Fundamental data from Yahoo Finance which extends the process of collecting and parsing raw data.
 
 ### Methodology:
 #### Decision Tree Regression (DTR):
