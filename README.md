@@ -29,6 +29,8 @@ The following provides instructions on setting up your project locally. To get a
 
 ````$ python FundamentalScreener.py````
 
+** Note the program will take at least an hour to run on your computer.
+
 ### Methodology:
 #### Decision Tree Regression (DTR):
 DTR involves segmenting predictor variables into distinct regions to predict stock returns. It starts with all observations in a single region and iteratively splits data into smaller regions to minimize the Residual Sum of Squares (RSS). The tree is pruned to prevent overfitting, using a Grid Search Cross-Validation to optimize hyperparameters.
