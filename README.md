@@ -19,11 +19,15 @@ The Enhanced Stock Screening Model integrates Decision Tree Regression (DTR) and
 The following provides instructions on setting up your project locally. To get a local copy up and running, follow these steps.
 1. Clone the repo:
 
-````git clone https://github.com/KobAmoah/Fundamental-Stock-Screener.git````
+````$ git clone https://github.com/KobAmoah/Fundamental-Stock-Screener.git````
 
-2. Compile and run the program on the terminal :
+2. Next, install the package setup from requirements.txt.
 
-````python FundamentalScreener.py````
+````$ pip install -r requirements.txt````
+
+3. Compile and run the program on the terminal :
+
+````$ python FundamentalScreener.py````
 
 ### Methodology:
 #### Decision Tree Regression (DTR):
