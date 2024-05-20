@@ -31,6 +31,12 @@ The following provides instructions on setting up your project locally. To get a
 
 ** Note the program will take at least an hour to run on your computer. I had to web scrape Fundamental data from Yahoo Finance which extends the process of collecting and parsing raw data.
 
+## Caution:
+Given the tilt of the screener is to identify undervalued companies in a given index, it is inevitable the screener will include companies that are correctly undervalued by the market. An analyst has to be willing to look into an undervalued company's financials to determine if it is rightly undervalued. Specifically, the analyst has to assess a company for the following scenarios: 
+
+1. Mature Companies whose growth is in the past. Managed earnings(where earnings growth diverge significantly from revenue growth) and management inefficiencies are crucial to identify.
+2. Firms in decline, where growth is often negative, and the potential for distress and bankruptcy may be substantial. 
+
 ### Methodology:
 #### Decision Tree Regression (DTR):
 DTR involves segmenting predictor variables into distinct regions to predict stock returns. It starts with all observations in a single region and iteratively splits data into smaller regions to minimize the Residual Sum of Squares (RSS). The tree is pruned to prevent overfitting, using a Grid Search Cross-Validation to optimize hyperparameters.
