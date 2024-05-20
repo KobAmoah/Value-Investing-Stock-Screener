@@ -14,8 +14,9 @@ This program sets up a class to extract valuation information for a given list o
 import numpy as np
 import pandas as pd
 import yfinance as yf
+import time
 import re
-from yahoo_fin import stock_info as si
+from YahooFinanceScraper import *
 
 class DataExtraction:
     """
@@ -34,60 +35,84 @@ class DataExtraction:
         self.stock_list = stock_list
         self.operating_names = operating_names
         self.valuation_names = valuation_names
-        self.operating_stats = pd.DataFrame(index=stock_list, columns=operating_names)
-        self.valuation_stats = pd.DataFrame(index=stock_list, columns=valuation_names)
+        self.operating_stats = pd.DataFrame(index=stock_list, columns=self.operating_names)
+        self.valuation_stats = pd.DataFrame(index=stock_list, columns=self.valuation_names)
 
-    def extract_operating_stats(self,data_range =list(range(1)) + [-1] ):
+    def extract_operating_stats(self,data_range =list(range(1)) + [-1],ip_list = None ):
         """
         Extracts operating statistics for each stock in the stock_list and populates the operating_stats DataFrame.
         """
         for ticker in self.stock_list:
-            temp = si.get_stats(ticker)
-            temp = temp.iloc[:, data_range]
-            temp.columns = ["Attribute", "Recent"]
-            # Include only strings in operating_names
-            strings_to_include = self.operating_names
-            temp = temp[temp.apply(lambda row: any(s in str(cell) for cell in row for s in strings_to_include), axis=1)]
-            temp["Recent"] = temp["Recent"].apply(lambda x: self.parse_value(x))
-            temp = temp.fillna(0).pivot_table(values='Recent', columns='Attribute').reset_index(drop=True)
-            
-            # Remove anything within parentheses using regular expressions
-            column_names = temp.columns
-            column_names_cleaned = [re.sub(r'\([^()]*\)', '', column) for column in column_names]
-            # Strip leading and trailing whitespaces
-            column_names_cleaned = [column.strip() for column in column_names_cleaned]
-            temp.columns = column_names_cleaned       
-            # Find common columns between self.operating_stats and temp
-            common_columns = self.operating_stats.columns.intersection(temp.columns)
-            # Subset columns present in temp from self.operating_stats 
-            temp = temp[common_columns] 
-            self.operating_stats.loc[ticker, :] = temp.values[0]
+            try:
+                temp = YahooFinanceScraper()
+                temp = temp.get_stats(ticker,ip_list)
+                if temp is not None:
+                    temp = temp.iloc[:, data_range]
+                    temp.columns = ["Attribute", "Recent"]
+                    # Include only strings in operating_names
+                    strings_to_include = self.operating_names
+                    temp = temp[temp.apply(lambda row: any(s in str(cell) for cell in row for s in strings_to_include), axis=1)]
+                    temp["Recent"] = temp["Recent"].apply(lambda x: self.parse_value(x))
+                    temp = temp.pivot_table(values='Recent', columns='Attribute',dropna=False).reset_index(drop=True)
+                    # Remove anything within parentheses using regular expressions
+                    column_names = temp.columns
+                    column_names_cleaned = [re.sub(r'\([^()]*\)', '', column) for column in column_names]
+                    # Strip leading and trailing whitespaces
+                    column_names_cleaned = [column.strip() for column in column_names_cleaned]      
+                    temp.columns = column_names_cleaned 
+                    # Find common columns between self.operating_stats and temp
+                    common_columns = self.operating_stats.columns.intersection(temp.columns)
+                    # Subset columns present in temp from self.operating_stats 
+                    temp = temp[common_columns] 
+                    self.operating_stats.loc[ticker, :] = temp.values[0]
+                else:
+                    print(f"Failed to retrieve data for {ticker}")
+                    continue
+            except IndexError as e:
+                 print(f"Failed to retrieve data for {ticker}: {e}")
             
                   
-    def extract_valuation_stats(self,data_range =list(range(1)) + [-1] ):
+    def extract_valuation_stats(self,data_range =list(range(1)) + [-1],ip_list = None , all_data = False):
         """
         Extracts valuation statistics for each stock in the stock_list and populates the valuation_stats DataFrame.
         """
+        if all_data == True:
+            self.valuation_stats = pd.DataFrame(index=self.stock_list, columns=self.valuation_names + ["Market Cap"])
+        else:
+            self.valuation_stats = self.valuation_stats
         for ticker in self.stock_list:
-            temp = si.get_stats_valuation(ticker)
-            temp = temp.iloc[:, data_range]
-            temp.columns = ["Attribute", "Recent"]
-            # Include only strings in valuation_names
-            strings_to_include = self.valuation_names
-            temp = temp[temp.apply(lambda row: any(s in str(cell) for cell in row for s in strings_to_include), axis=1)]
-            temp["Recent"] = temp["Recent"].apply(lambda x: self.parse_value(x))
-            temp = temp.fillna(0).pivot_table(values='Recent', columns='Attribute').reset_index(drop=True)
-            # Remove anything within parentheses using regular expressions
-            column_names = temp.columns
-            column_names_cleaned = [re.sub(r'\([^()]*\)', '', column) for column in column_names]
-            # Strip leading and trailing whitespaces
-            column_names_cleaned = [column.strip() for column in column_names_cleaned]
-            temp.columns = column_names_cleaned
-            # Find common columns between self.valuation_stats and temp
-            common_columns = self.valuation_stats.columns.intersection(temp.columns)
-            # Subset columns present in  temp from self.valuation_stats 
-            temp = temp[common_columns] 
-            self.valuation_stats.loc[ticker, :] = temp.values
+            try:
+                temp = YahooFinanceScraper()
+                temp = temp.get_stats_valuation(ticker,ip_list)
+                if temp is not None:
+                    temp = temp.iloc[:, data_range]
+                    temp.columns = ["Attribute", "Recent"]
+                    if all_data == False:
+                        # Include only strings in valuation_names
+                        strings_to_include = self.valuation_names
+                    else:
+                        self.valuation_names = self.valuation_names + ["Market Cap"]
+                        strings_to_include = self.valuation_names
+                    temp = temp[temp.apply(lambda row: any(s in str(cell) for cell in row for s in strings_to_include), axis=1)]
+                    temp["Recent"] = temp["Recent"].apply(lambda x: self.parse_value(x))
+                    temp = temp.pivot_table(values='Recent', columns='Attribute',dropna=False).reset_index(drop=True)
+                    # Remove anything within parentheses using regular expressions
+                    column_names = temp.columns
+                    column_names_cleaned = [re.sub(r'\([^()]*\)', '', column) for column in column_names]
+                    # Strip leading and trailing whitespaces
+                    column_names_cleaned = [column.strip() for column in column_names_cleaned]
+                    temp.columns = column_names_cleaned
+                    # Find common columns between self.valuation_stats and temp
+                    common_columns = self.valuation_stats.columns.intersection(temp.columns)
+                    # Subset columns present in  temp from self.valuation_stats 
+                    temp = temp[common_columns] 
+                    self.valuation_stats.loc[ticker, :] = temp.values
+                else:
+                    print(f"Failed to retrieve data for {ticker}")
+                    continue
+            except IndexError as e:
+                 print(f"Failed to retrieve data for {ticker}: {e}")
+            
             
     def parse_value(self, value_str):
         """
@@ -117,6 +142,8 @@ class DataExtraction:
                 return float(value_str.replace('k', '')) * 1e3
             elif '%' in value_str:
                 return float(value_str.replace('%', ''))
+            elif '--' in value_str:
+                return np.nan
             else:
                 return float(value_str)
       
@@ -135,18 +162,22 @@ class DataExtraction:
         returns_data = []
 
         for ticker in self.stock_list:
-            # Retrieve historical price data
-            stock_data = yf.download(ticker, start=start_date, end=end_date, progress= False ).dropna()
-            
-            # Check if the stock data has history starting from the start_date
-            if len(stock_data) > 0:
-                # Compute period returns
-                log_return = np.log(stock_data['Adj Close'] / stock_data['Adj Close'].shift())
-                log_return = log_return[~np.isnan(log_return)]
-                period_return = np.cumprod(1 + np.array(log_return)) - 1
-                period_return = np.multiply(period_return,100)
-                period_return = period_return.tolist()
-                returns_data.append({'Period_Return': period_return[-1], 'Ticker': ticker})
+            try:
+                # Retrieve historical price data
+                stock_data = yf.download(ticker, start=start_date, end=end_date, progress=False).dropna()
+
+                # Check if the stock data has history starting from the start_date
+                if len(stock_data) > 0:
+                    # Compute period returns
+                    log_return = np.log(stock_data['Adj Close'] / stock_data['Adj Close'].shift())
+                    log_return = log_return[~np.isnan(log_return)]
+                    period_return = np.cumprod(1 + np.array(log_return)) - 1
+                    period_return = np.multiply(period_return, 100)
+                    period_return = period_return.tolist()
+                    returns_data.append({'Period_Return': period_return[-1], 'Ticker': ticker})
+            except yf.errors.YFinanceError as e:
+                # Handle the exception (e.g., print a message, log, or skip the stock)
+                print(f"Failed to retrieve data for {ticker}: {e}")
     
         returns_df = pd.DataFrame(returns_data)
         return returns_df

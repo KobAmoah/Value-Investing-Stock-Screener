@@ -18,7 +18,7 @@ class TunedDecisionTreeRegressor:
     A class for performing hyperparameter tuning on DecisionTreeRegressor models.
 
     Attributes:
-        min_samples_split (int) :  Minimum number of samples required to split an internal node. Default is 20
+        min_samples_split (int) :  Minimum number of samples required to split an internal node
         best_model (DecisionTreeRegressor): Best trained model after hyperparameter tuning.
         best_model_params (dict): Parameters of the best model found during tuning.
         best_score (float): Best score achieved during hyperparameter tuning.

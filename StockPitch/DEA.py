@@ -107,7 +107,7 @@ class DEA:
         In = p.LpAffineExpression([(self.input_weights[(j0,i)], self.inputs.values[(j1,i)]) for i in self._j])
         
         return Out - In
-        
+    
     def solve(self):
         """
         Solves the DEA model.
@@ -120,14 +120,17 @@ class DEA:
         status = {}
         weights = {}
         efficiency = pd.DataFrame(data=np.nan, index=self.inputs.index, columns=['Efficiency'])
-        
+
         for i, problem in list(self.DMU.items()):
-            problem.solve()
+            # Create a solver object and set its verbosity to 0 (suppress output)
+            solver = p.PULP_CBC_CMD(msg=0)
+            problem.solve(solver)
+
             status[i] = p.LpStatus[problem.status]
             weights[i] = {}
-            
+
             for j in problem.variables():
                 weights[i][j.name] = j.varValue
             efficiency.iloc[i,0] = p.value(problem.objective)
-        
+
         return status, weights, efficiency

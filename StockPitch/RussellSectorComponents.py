@@ -16,7 +16,7 @@ class RussellSectorComponents:
         sector (str): The sector to use for data retrieval. Default is "Technology".
     """
 
-    def __init__(self, sector = "Technology"):
+    def __init__(self, sector = None):
         """
         Initializes the RussellSectorComponents object.
 
@@ -39,7 +39,9 @@ class RussellSectorComponents:
         
         russell = pd.read_html(url)[2]
         russell["Ticker"] = russell["Ticker"].str.replace(".", "-")
-        russell.rename(columns={"GICS Sector": "Sector"}, inplace=True)
-        russell = russell[russell.Sector == self.sector]
-            
-        return russell.Ticker
+        if not type(self.sector) == type(None):
+            russell.rename(columns={"GICS Sector": "Sector"}, inplace=True)
+            russell = russell[russell.Sector == self.sector]
+            return russell.Ticker
+        else:
+            return russell.Ticker
