@@ -33,6 +33,7 @@ The following provides instructions on setting up your project locally. To get a
 
 ## Program Output:
 <img width="315" alt="StockPitch DateRun" src="https://github.com/KobAmoah/Value-Investing-Stock-Screener/assets/108365002/ff9203d7-231a-45fd-805b-4ebcf4e7fea7">
+
 <img width="568" alt="StockPitch Printout" src="https://github.com/KobAmoah/Value-Investing-Stock-Screener/assets/108365002/84c43155-8ac0-45ae-843b-3fa676e1d007">
 
 ## Caution:
