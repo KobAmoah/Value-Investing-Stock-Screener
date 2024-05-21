@@ -29,7 +29,7 @@ The following provides instructions on setting up your project locally. To get a
 
 ````$ python FundamentalScreener.py````
 
-** Note the program will take at least an hour to run on your computer. I had to web scrape Fundamental data from Yahoo Finance which extends the process of collecting and parsing raw data.
+** Note the program will take at least 6 hours to run on your computer. I had to web scrape Fundamental data from Yahoo Finance which extends the process of collecting and parsing raw data.
 
 ## Program Output:
 <img width="315" alt="StockPitch DateRun" src="https://github.com/KobAmoah/Value-Investing-Stock-Screener/assets/108365002/ff9203d7-231a-45fd-805b-4ebcf4e7fea7">
