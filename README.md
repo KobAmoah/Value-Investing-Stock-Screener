@@ -33,7 +33,6 @@ The following provides instructions on setting up your project locally. To get a
 
 ## Program Output:
 This program was run on May 25, 2024.
-
 <img width="311" alt="Tech" src="https://github.com/KobAmoah/Value-Investing-Stock-Screener/assets/108365002/edcb56b9-ab35-425f-85d7-8bbf35362903">
 
 <img width="514" alt="TechStocksPicks" src="https://github.com/KobAmoah/Value-Investing-Stock-Screener/assets/108365002/b322a4c3-e184-4353-b8b1-2d3e9bfc2afc">
