@@ -59,32 +59,31 @@ class SectorAnalyzer:
         tickers = self.analyzer.get_sector_stocks()
 
         # Retrieve period returns for the specified list of tickers
-        period_returns = self.analyzer.get_period_returns(tickers)
+#        period_returns = self.analyzer.get_period_returns(tickers)
         
         data = YahooFinanceScraper()
-        ip_list = data.get_iplist()
+#        ip_list = data.get_iplist()
 
         # Extract operating and valuation statistics for the retrieved list of tickers
-        operating_stats, valuation_stats = self.analyzer.extract_financial_info(tickers, list(range(1)) + [-1],ip_list)
+#        operating_stats, valuation_stats = self.analyzer.extract_financial_info(tickers, list(range(1)) + [-1],ip_list)
 
         # Combine period returns, operating, and valuation statistics into a single DataFrame
-        combined_df = pd.concat([period_returns.reset_index(drop=True),
-                                 operating_stats.reset_index(drop=True),
-                                 valuation_stats.reset_index(drop=True)], axis=1)
+ #       combined_df = pd.concat([period_returns.reset_index(drop=True),
+ #                                operating_stats.reset_index(drop=True),
+#                                 valuation_stats.reset_index(drop=True)], axis=1)
 
-        # Remove rows with at least 1 negative value
-        combined_df = combined_df[(combined_df > 0).any(axis=1)]        
-        combined_df = combined_df.dropna()
-        
+        # Remove rows with NaNs
+  #      combined_df = combined_df.fillna(0)
+
 
         # Split combined DataFrame into period returns, operating statistics, and valuation statistics
-        period_returns_all = combined_df.iloc[:, 0]
-        operating_stats_all = combined_df[self.operating_names]
-        valuation_stats_all = combined_df[self.valuation_names]
+#        period_returns_all = combined_df.iloc[:, 0]
+ #       operating_stats_all = combined_df[self.operating_names]
+  #      valuation_stats_all = combined_df[self.valuation_names]
 
         # Fit a decision tree model using the operating and valuation statistics as features and period returns as the target variable
         print("Fitting decision tree model")
-        self.analyzer.fit_decision_tree_model(operating_stats_all, valuation_stats_all, period_returns_all)
+ #       self.analyzer.fit_decision_tree_model(operating_stats_all, valuation_stats_all, period_returns_all)
         
         # Extract operating and valuation statistics again for further analysis
         ip_list = data.get_iplist() #Obtain updated ip_list
@@ -93,9 +92,8 @@ class SectorAnalyzer:
         # Combine operating, and valuation statistics into a single DataFrame
         combined_df = pd.concat([operating_stats,valuation_stats], axis=1)
 
-        # Remove rows with at least 1 negative value
-        combined_df = combined_df[(combined_df > 0).any(axis=1)]      
-        combined_df = combined_df.dropna()
+        # Remove rows with NaNs
+        combined_df = combined_df.fillna(0)
         
         # Split combined DataFrame into, operating statistics, and valuation statistics
         operating_stats = combined_df[self.operating_names]
@@ -117,6 +115,7 @@ class SectorAnalyzer:
 
         return result
 
+    
 
 if __name__ == "__main__":
     # Define the sector, operating names, and valuation names for analysis
@@ -127,7 +126,7 @@ if __name__ == "__main__":
                        'Price/Book', 'PEG Ratio', 'Price/Sales']
 
     # Define the query criteria for selecting the best stocks based on financial metrics
-    query_criteria = "Beta < 2.595 and Price_Book < 12.475 and Price_Sales < 12.65 and Revenue_Per_Share > 8.82 and Enterprise_Value_EBITDA < 532.2 and Diluted_EPS < 15.32"
+    query_criteria = "Return_on_Assets < 42.81 and Diluted_EPS > 8.345"
 
     # Specify the number of cheapest stocks to return
     cheapest_number = 10    
