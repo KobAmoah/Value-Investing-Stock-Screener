@@ -32,9 +32,11 @@ The following provides instructions on setting up your project locally. To get a
 ** Note the program will take at least 6 hours to run on your computer. I had to web scrape Fundamental data from Yahoo Finance which extends the process of collecting and parsing raw data.
 
 ## Program Output:
-<img width="315" alt="StockPitch DateRun" src="https://github.com/KobAmoah/Value-Investing-Stock-Screener/assets/108365002/ff9203d7-231a-45fd-805b-4ebcf4e7fea7">
+This program was run on May 25, 2024.
 
-<img width="568" alt="StockPitch Printout" src="https://github.com/KobAmoah/Value-Investing-Stock-Screener/assets/108365002/84c43155-8ac0-45ae-843b-3fa676e1d007">
+<img width="311" alt="Tech" src="https://github.com/KobAmoah/Value-Investing-Stock-Screener/assets/108365002/edcb56b9-ab35-425f-85d7-8bbf35362903">
+
+<img width="514" alt="TechStocksPicks" src="https://github.com/KobAmoah/Value-Investing-Stock-Screener/assets/108365002/b322a4c3-e184-4353-b8b1-2d3e9bfc2afc">
 
 ## Caution:
 Given the tilt of the screener is to identify undervalued companies in a given index, it is inevitable the screener will include companies that are correctly undervalued by the market. An analyst has to be willing to look into an undervalued company's financials to determine if it is rightly undervalued. Specifically, the analyst has to assess a company for the following scenarios: 
